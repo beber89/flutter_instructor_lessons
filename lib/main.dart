@@ -28,7 +28,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   List<Map<String, String>> transactions = List<Map<String, String>>();
-  List<Widget> viewTransactions = List<Widget>();
 
 
   void _incrementCounter() {
@@ -65,30 +64,21 @@ class _MyHomePageState extends State<MyHomePage> {
              onPressed: (){
                setState((){
                  transactions.add({"Expense": controller1.text, "Price": controller2.text});
-                 viewTransactions = List<Widget>();
-                 for (var i=0; i < transactions.length; i++) {
-                   viewTransactions.add(
-                       ListTile(
-                           title: Text(transactions[i]["Expense"]),
-                           subtitle: Text(transactions[i]["Price"])
-                       )
-                   );
-                 }
-                 print(viewTransactions);
                });
                print("$transactions");
              },
              child: Text("Submit"),
            ),
                 Container(
-                 height: 300,
-                 child:ListView(
-                   children: viewTransactions,
-                //  itemCount: transactions.length,
-              //    itemBuilder: (ctx, idx){
-              //    return ListTile(title: Text(transactions[idx]["Expense"]));
-              //  }
-               ) ,),
+                 height: 400,
+                 child:ListView.builder(
+                 itemCount: transactions.length,
+                 itemBuilder: (ctx, idx){
+                 return ListTile(
+                   title: Text(transactions[idx]["Expense"]), 
+                   subtitle: Text(transactions[idx]["Price"]),
+                  );
+               }) ,),
 ],
         ),
       ),
