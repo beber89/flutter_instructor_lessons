@@ -1,0 +1,3 @@
+- responsiveness
+- navigation
+- charts
